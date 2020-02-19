@@ -52,7 +52,6 @@ public class UserServiceContractTest {
     @Test
     public void userExists() {
         User user = userServiceClient.getUser("1");
-
         assertThat(user.getName()).isEqualTo("user name for CDC");
     }
 }
