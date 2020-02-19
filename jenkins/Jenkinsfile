@@ -3,12 +3,23 @@ pipeline {
 
   agent any
 
+  environment {
+    BRANCH_NAME=env.GIT_BRANCH.replace("origin/", "")
+  }
+
   stages {
     stage ('Build') {
       steps {
         sh "./mvnw clean verify"
       }
     }
+
+    stage('Publish Pacts') {
+      steps {
+        sh './mvnw pact:publish -Dpact.consumer.version=${GIT_COMMIT} -Dpact.tag=${BRANCH_NAME}'
+      }
+    }
+
     stage('Deploy') {
       when {
         branch 'master'

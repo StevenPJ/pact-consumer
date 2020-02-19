@@ -53,6 +53,24 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>au.com.dius</groupId>
+			<artifactId>pact-jvm-consumer-java8_2.12</artifactId>
+			<version>${pact.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>au.com.dius</groupId>
+			<artifactId>pact-jvm-consumer_2.12</artifactId>
+			<version>${pact.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>au.com.dius</groupId>
+			<artifactId>pact-jvm-provider_2.12</artifactId>
+			<version>${pact.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -60,6 +78,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>au.com.dius</groupId>
+				<artifactId>pact-jvm-provider-maven_2.12</artifactId>
+				<version>${pact.version}</version>
+				<configuration>
+					<!-- pact_broker is the service name in docker-compose -->
+					<pactBrokerUrl>http://pact_broker</pactBrokerUrl>
+					<projectVersion>${pact.consumer.version}</projectVersion>
+					<tags>
+						<tag>${pact.tag}</tag>
+					</tags>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
