@@ -29,24 +29,6 @@ pipeline {
         }
       }
     }
-
-    stage('Deploy') {
-      when {
-        branch 'master'
-      }
-      steps {
-        echo 'Deploying to prod now...'
-      }
-    }
-
-    stage('Tag Pact') {
-      steps {
-        dir('pact/bin') {
-          sh "./pact-broker create-version-tag -a pact-consumer -b http://pact_broker -e ${GIT_COMMIT} -t prod"
-        }
-      }
-    }
-
   }
 
 }
