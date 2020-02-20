@@ -45,6 +45,7 @@ public class UserServiceContractTest {
             .status(200)
             .body(LambdaDsl.newJsonBody((o) ->
                 o.stringType("name", "user name for CDC")
+                        .stringType("colour", "blue")
             ).build()).toPact();
     }
 
@@ -53,5 +54,6 @@ public class UserServiceContractTest {
     public void userExists() {
         User user = userServiceClient.getUser("1");
         assertThat(user.getName()).isEqualTo("user name for CDC");
+        assertThat(user.getColour()).isEqualTo("blue");
     }
 }

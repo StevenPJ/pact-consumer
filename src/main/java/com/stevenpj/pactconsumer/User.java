@@ -11,6 +11,7 @@ import java.util.List;
 public class User {
 
     private String name;
+    private String colour;
     private String role;
     private LocalDateTime lastLogin;
     private List<Friend> friends;
