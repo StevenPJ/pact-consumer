@@ -8,7 +8,7 @@ pipeline {
   }
 
   stages {
-    stage ('Build') {
+    stage('Build') {
       steps {
         sh "./mvnw clean verify"
       }
@@ -38,12 +38,13 @@ pipeline {
         echo 'Deploying to prod now...'
       }
     }
-  }
 
-  stage('Tag Pact') {
-    steps {
+    stage('Tag Pact') {
+      steps {
         sh "./pact-broker create-version-tag -a pact-consumer -b http://pact_broker -e ${GIT_COMMIT} -t prod"
       }
     }
+
+  }
 
 }
